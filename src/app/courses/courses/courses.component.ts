@@ -8,10 +8,10 @@ import { CourseServiceService } from '../service/course-service.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent {
-  courses: Courses[];
+  courses: Courses[] = [];
   displayedColumns = ['name', 'category'];
 
   constructor(coursesService: CourseServiceService) {
-    this.courses = coursesService.getCourses();
+    coursesService.getCourses().subscribe(courses => this.courses);
   }
 }
