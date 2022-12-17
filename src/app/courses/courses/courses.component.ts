@@ -12,6 +12,6 @@ export class CoursesComponent {
   displayedColumns = ['name', 'category'];
 
   constructor(coursesService: CourseServiceService) {
-    coursesService.getCourses().subscribe(courses => this.courses);
+    coursesService.getCourses().subscribe(courses => this.courses = courses);
   }
 }
