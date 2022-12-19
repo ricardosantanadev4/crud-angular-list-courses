@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Courses } from '../model/courses';
 import { CourseServiceService } from '../service/course-service.service';
 
@@ -8,10 +9,10 @@ import { CourseServiceService } from '../service/course-service.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent {
-  courses: Courses[] = [];
+  courses$: Observable<Courses[]>;
   displayedColumns = ['name', 'category'];
 
   constructor(coursesService: CourseServiceService) {
-    coursesService.getCourses().subscribe(courses => this.courses = courses);
+    this.courses$ = coursesService.getCourses();
   }
 }
