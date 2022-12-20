@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { Courses } from '../model/courses';
 import { CourseServiceService } from '../service/course-service.service';
 
@@ -13,6 +13,11 @@ export class CoursesComponent {
   displayedColumns = ['name', 'category'];
 
   constructor(coursesService: CourseServiceService) {
-    this.courses$ = coursesService.getCourses();
+    this.courses$ = coursesService.getCourses().pipe(
+      catchError(error => {
+        console.log(error);
+        return of([])
+      })
+    );
   }
 }
