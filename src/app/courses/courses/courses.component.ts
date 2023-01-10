@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { Courses } from '../model/courses';
-import { CourseServiceService } from '../service/course-service.service';
+import { CourseServiceService } from '../service/course.service';
 
 @Component({
   selector: 'app-courses',
