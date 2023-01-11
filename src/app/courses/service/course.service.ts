@@ -17,7 +17,7 @@ export class CourseServiceService {
       // first() se increve no observable e quando vem a primeira resposta se desinscreve do observable
       first(),
       // delay(5000),
-      // tap(courses => console.log(courses))      
+      tap(courses => console.log(courses))
     );
   }
 
