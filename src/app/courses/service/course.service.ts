@@ -8,7 +8,8 @@ import { delay, first, Observable, observable, tap } from 'rxjs';
 })
 export class CourseServiceService {
   //  courses: Courses[] = [{ _id: '1', name: 'Angular', category: 'front-end' }];
-  private readonly API = '/api/courses';
+  private readonly API = 'http://localhost:3000/value';
+  // private readonly API = '/api/courses';
   constructor(private httpClient: HttpClient) {
 
   }

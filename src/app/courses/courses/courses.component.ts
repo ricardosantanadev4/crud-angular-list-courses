@@ -12,7 +12,7 @@ import { CourseServiceService } from '../service/course.service';
 })
 export class CoursesComponent {
   courses$: Observable<Courses[]>;
-  displayedColumns = ['name', 'category'];
+  displayedColumns = ['name', 'category', 'actions'];
 
   constructor(coursesService: CourseServiceService, public dialog: MatDialog) {
     this.courses$ = coursesService.getCourses().pipe(
