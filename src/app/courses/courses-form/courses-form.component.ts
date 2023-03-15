@@ -19,4 +19,12 @@ export class CoursesFormComponent {
       category: [null]
     });
   }
+
+  onSubmit() {
+    console.log('onSubmit');
+  }
+
+  onCancel() {
+    console.log('Cancel');
+  }
 }

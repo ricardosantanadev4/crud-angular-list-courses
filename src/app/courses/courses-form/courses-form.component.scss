@@ -1,0 +1,29 @@
+// tamanho do card
+mat-card {
+    max-width: 80%;
+    //  as sigla em e a margem padrao aplicacao. 2m indica pro css que vai ser aplicada 2 vezes a margem padrao
+    margin: 2em auto;
+    text-align: center;
+}
+
+// posicao dos botoes
+mat-card-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// tamanho dos inputs no formulario
+.full-width {
+    width: 100%;
+}
+
+// tamanho do formulario
+.min-width {
+    width: 100%;
+    min-width: 150px;
+}
+
+button {
+    margin: 2em;
+}
