@@ -16,7 +16,7 @@ export class CoursesComponent {
   displayedColumns = ['name', 'category', 'actions'];
   // private route: ActivatedRoute rota atual
   constructor(coursesService: CourseServiceService, public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
-    this.courses$ = coursesService.getCourses().pipe(
+    this.courses$ = coursesService.list().pipe(
       catchError(error => {
         console.log(error);
         this.openDialog('Erro ao carregar recursos.');

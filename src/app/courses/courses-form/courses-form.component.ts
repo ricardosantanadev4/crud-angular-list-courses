@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CourseServiceService } from '../service/course.service';
 
 @Component({
   selector: 'app-courses-form',
@@ -12,7 +13,7 @@ export class CoursesFormComponent {
 
   // para criar o formulario de cadastro e necessario ter as classes FormBuilder e FormGroup. com isso e necessario importar o modulo ReactiveFormsModule
   // a classe FormBuilder vai ser usada para auxiliar na criacao de um FormGroup
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private courseService: CourseServiceService) {
     this.form = this.formBuilder.group({
       // campos do formulario
       name: [null],
@@ -21,10 +22,12 @@ export class CoursesFormComponent {
   }
 
   onSubmit() {
-    console.log('onSubmit');
+    // console.log(this.form.value);
+    this.courseService.save(this.form.value);
   }
 
   onCancel() {
     console.log('Cancel');
   }
+
 }
