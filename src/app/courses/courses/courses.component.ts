@@ -13,7 +13,7 @@ import { CourseServiceService } from '../service/course.service';
 })
 export class CoursesComponent {
   courses$: Observable<Courses[]>;
-  displayedColumns = ['name', 'category', 'actions'];
+
   // private route: ActivatedRoute rota atual
   constructor(coursesService: CourseServiceService, public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
     this.courses$ = coursesService.list().pipe(

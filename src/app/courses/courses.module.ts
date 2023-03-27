@@ -5,11 +5,13 @@ import { CoursesComponent } from './courses/courses.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { CoursesFormComponent } from './courses-form/courses-form.component';
+import { CoursesListComponent } from './courses-list/courses-list.component';
 
 @NgModule({
   declarations: [
     CoursesComponent,
-    CoursesFormComponent
+    CoursesFormComponent,
+    CoursesListComponent
   ],
   imports: [
     CommonModule,
