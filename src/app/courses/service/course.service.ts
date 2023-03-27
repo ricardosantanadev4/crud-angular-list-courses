@@ -24,10 +24,8 @@ export class CourseServiceService {
     );
   }
 
-  save(record: Courses) {
-    // console.log(record);
-    // necessario se increver no observable para funcionar usando o subscribe()
-    return this.httpClient.post<Courses>(this.API, record).subscribe(data => console.log(data));
+  save(record: Partial<Courses>) {
+    // console.log(record);    
+    return this.httpClient.post<Courses>(this.API, record);
   }
-
 }
