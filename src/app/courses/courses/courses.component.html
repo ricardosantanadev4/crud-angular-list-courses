@@ -4,13 +4,15 @@
       <span>Cursos disponíveis</span>
     </mat-toolbar>
 
-    <app-courses-list *ngIf="courses$ | async as courses; else elseBlock" [coursesList]="courses">
-    </app-courses-list>
+    <div class="mat-elevation-z8">
+      <app-courses-list *ngIf="courses$ | async as courses; else elseBlock" [coursesList]="courses">
+      </app-courses-list>
 
-    <ng-template #elseBlock>
-      <div class="loding-spinner">
-        <mat-spinner></mat-spinner>
-      </div>
-    </ng-template>
+      <ng-template #elseBlock>
+        <div class="loding-spinner">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-template>
+    </div>
   </mat-card-content>
 </mat-card>
