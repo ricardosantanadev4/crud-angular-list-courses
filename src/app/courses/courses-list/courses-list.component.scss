@@ -1,7 +1,19 @@
-// adiciona um scroll bar caso tenha muitos cursos a serem carregados
+// scroll da tabela
 mat-table {
-    // vai caucular automaticamente os paço na tela
+    // vai caucular automaticamente os espaço na tela
     overflow: auto;
     // se passar do tamanho maximo vai ser adicionado o scroll
     max-height: 600px;
+}
+
+// posicao dos botoes de acoes
+.action-column {
+    // joga tudo pra direita com 136px de espaço, cada valor do flex representa uma coluna
+    flex: 0 0 136px;
+}
+
+// posicao do botao adicionar
+.action-column-header {
+    // joga tudo pra direita com 136px de espaço, cada valor do flex representa uma coluna
+    flex: 0 0 120px;
 }
