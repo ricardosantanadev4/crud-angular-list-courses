@@ -1,0 +1,7 @@
+// adiciona um scroll bar caso tenha muitos cursos a serem carregados
+mat-table {
+    // vai caucular automaticamente os paço na tela
+    overflow: auto;
+    // se passar do tamanho maximo vai ser adicionado o scroll
+    max-height: 600px;
+}

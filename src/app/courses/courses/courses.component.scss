@@ -4,6 +4,13 @@ mat-card {
     text-align: center;
 }
 
+// vai organizar o layout em colunas orizontalmente
+.column-flex {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
 .loding-spinner {
     display: flex;
     justify-content: center;
