@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormBuilder, UntypedFormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Route, Router } from '@angular/router';
 import { CourseServiceService } from '../service/course.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class CoursesFormComponent {
 
   // para criar o formulario de cadastro e necessario ter as classes FormBuilder e FormGroup. com isso e necessario importar o modulo ReactiveFormsModule
   // a classe FormBuilder vai ser usada para auxiliar na criacao de um FormGroup
-  constructor(private formBuilder: NonNullableFormBuilder, private courseService: CourseServiceService, private _snackBar: MatSnackBar, private location: Location) {
+  constructor(private formBuilder: NonNullableFormBuilder, private courseService: CourseServiceService,
+    private _snackBar: MatSnackBar, private location: Location) {
     // this.form = this.formBuilder.group({
     //   // campos do formulario
     //   name: [''],

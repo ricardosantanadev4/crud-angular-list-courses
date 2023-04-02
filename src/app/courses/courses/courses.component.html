@@ -4,8 +4,9 @@
       <span>Cursos disponíveis</span>
     </mat-toolbar>
 
-    <div class="mat-elevation-z8" class="column-flex">
-      <app-courses-list *ngIf="courses$ | async as courses; else elseBlock" [coursesList]="courses">
+    <div class="column-flex" class="mat-elevation-z8">
+      <app-courses-list *ngIf="courses$ | async as courses; else elseBlock" [coursesList]="courses"
+        (onaddCoursesList)="onAddCourses()">
       </app-courses-list>
 
       <ng-template #elseBlock>
