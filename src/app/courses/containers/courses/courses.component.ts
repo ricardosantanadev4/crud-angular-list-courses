@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of} from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/componets/error-dialog/error-dialog.component';
-import { Courses } from '../model/courses';
-import { CourseServiceService } from '../service/course.service';
+import { Courses } from '../../model/courses';
+import { CourseServiceService } from '../../service/course.service';
 
 @Component({
   selector: 'app-courses',

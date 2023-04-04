@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { CourseServiceService } from '../service/course.service';
+import { CourseServiceService } from '../../service/course.service';
 
 @Component({
   selector: 'app-courses-form',
