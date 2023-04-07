@@ -39,4 +39,10 @@ export class CoursesComponent {
     // relativeTo: this.route pega a rota atual e agrega ao /new, com isso e possivel colocar somente ['new'] no lugar de ['courses/new'] e com isso facilita a manutencao ex: se o nome da rota courses for alterado para cursos a navegacao vai continuar funcionando
     this.router.navigate(['new'], { relativeTo: this.route });
   }
+
+  onEditCourses(element: Courses) {
+    console.log('onEditCourses');
+    console.log(element);
+    this.router.navigate(['edit',element.id],{relativeTo: this.route});
+  }
 }

@@ -5,7 +5,8 @@ import { CoursesComponent } from './containers/courses/courses.component';
 
 const routes: Routes = [
   { path: '', component: CoursesComponent },
-  { path: 'new', component: CoursesFormComponent }
+  { path: 'new', component: CoursesFormComponent },
+  { path: 'edit/:id', component: CoursesFormComponent }
 ];
 
 @NgModule({

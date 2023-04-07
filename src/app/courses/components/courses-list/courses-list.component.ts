@@ -1,4 +1,4 @@
-import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Courses } from '../../model/courses';
 
 @Component({
@@ -8,7 +8,8 @@ import { Courses } from '../../model/courses';
 })
 export class CoursesListComponent {
   @Input() coursesList: Courses[] = [];
-  @Output() onaddCoursesList = new EventEmitter(false);
+  @Output() addEventCoursesList = new EventEmitter(false);
+  @Output() EditEventCoursesList = new EventEmitter(false);
   // readonly indica que esse vai ser o objeto final, e garante que ele não permite que ele seja
   readonly displayedColumns = ['name', 'category', 'actions'];
 
@@ -16,6 +17,12 @@ export class CoursesListComponent {
 
   onAddCoursesList() {
     console.log('addCoursesList');
-    this.onaddCoursesList.emit(true);
+    this.addEventCoursesList.emit(true);
   }
+
+  onEditCoursesList(element: Courses) {
+    console.log('onEditCoursesList');
+    this.EditEventCoursesList.emit(element);
+  }
+  
 }

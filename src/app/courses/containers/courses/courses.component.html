@@ -4,11 +4,15 @@
       <span>Cursos disponíveis</span>
     </mat-toolbar>
 
+    <!-- [coursesList]="courses" e o @Input() -->
+    <!-- (addEventCoursesList)="onAddCourses()" e  o @Output() -->
+    <!-- $event e o objeto que esta  sendo passo pelo evendo -->
     <div class="column-flex" class="mat-elevation-z8">
       <app-courses-list *ngIf="courses$ | async as courses; else elseBlock" [coursesList]="courses"
-        (onaddCoursesList)="onAddCourses()">
+        (addEventCoursesList)="onAddCourses()" 
+        (EditEventCoursesList)="onEditCourses($event)">
       </app-courses-list>
-
+      
       <ng-template #elseBlock>
         <div class="loding-spinner">
           <mat-spinner></mat-spinner>
