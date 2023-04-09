@@ -24,5 +24,4 @@ export class CoursesListComponent {
     console.log('onEditCoursesList');
     this.EditEventCoursesList.emit(element);
   }
-  
 }

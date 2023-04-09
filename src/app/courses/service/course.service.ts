@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Courses } from '../model/courses';
 import { HttpClient } from '@angular/common/http';
-import { first} from 'rxjs';
+import { first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,7 @@ export class CourseServiceService {
 
   }
 
+
   list() {
     return this.httpClient.get<Courses[]>(this.API).pipe(
       // first() se increve no observable e quando vem a primeira resposta se desinscreve do observable
@@ -27,5 +28,10 @@ export class CourseServiceService {
   save(record: Partial<Courses>) {
     // console.log(record);    
     return this.httpClient.post<Courses>(this.API, record);
+  }
+
+  loadById(id: string) {
+    // `${this.API}/${id}` concatena a url da API com o id
+    return this.httpClient.get<Courses>(`${this.API}/${id}`);
   }
 }

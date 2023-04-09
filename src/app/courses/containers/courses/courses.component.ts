@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, Observable, of} from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/componets/error-dialog/error-dialog.component';
 import { Courses } from '../../model/courses';
 import { CourseServiceService } from '../../service/course.service';
@@ -43,6 +43,6 @@ export class CoursesComponent {
   onEditCourses(element: Courses) {
     console.log('onEditCourses');
     console.log(element);
-    this.router.navigate(['edit',element.id],{relativeTo: this.route});
+    this.router.navigate(['edit', element.id], { relativeTo: this.route });
   }
 }
