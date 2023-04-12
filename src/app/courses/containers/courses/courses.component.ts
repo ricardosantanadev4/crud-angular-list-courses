@@ -42,7 +42,6 @@ export class CoursesComponent {
 
   onEditCourses(element: Courses) {
     console.log('onEditCourses');
-    console.log(element);
     this.router.navigate(['edit', element.id], { relativeTo: this.route });
   }
 }

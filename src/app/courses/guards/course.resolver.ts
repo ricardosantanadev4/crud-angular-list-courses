@@ -23,5 +23,4 @@ export class CourseResolver implements Resolve<Courses> {
     }
     return of({ id: '', name: '', category: '' });
   }
-  
 }

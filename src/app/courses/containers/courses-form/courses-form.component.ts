@@ -42,7 +42,7 @@ export class CoursesFormComponent {
       name: course.name,
       category: course.category,
     })
-    console.log(this.form.value)
+    // console.log(this.form.value)
 
   }
 
