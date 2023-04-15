@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/componets/error-dialog/error-dialog.component';
@@ -12,20 +13,24 @@ import { CourseServiceService } from '../../service/course.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent {
-  courses$: Observable<Courses[]>;
+  courses$: Observable<Courses[]> | null = null;
 
   // private route: ActivatedRoute rota atual
-  constructor(coursesService: CourseServiceService, public dialog: MatDialog
-    , private router: Router, private route: ActivatedRoute) {
+  constructor(private coursesService: CourseServiceService, public dialog: MatDialog
+    , private router: Router, private route: ActivatedRoute, private _snackBar: MatSnackBar) {
 
-    this.courses$ = coursesService.list().pipe(
+    this.refresh();
+
+  }
+
+  refresh() {
+    this.courses$ = this.coursesService.list().pipe(
       catchError(error => {
         console.log(error);
         this.openDialog('Erro ao carregar recursos.');
         return of([])
       })
     );
-
   }
 
   openDialog(errorMsg: string) {
@@ -43,5 +48,20 @@ export class CoursesComponent {
   onEditCourses(element: Courses) {
     console.log('onEditCourses');
     this.router.navigate(['edit', element.id], { relativeTo: this.route });
+  }
+
+  onDeletCourses(element: Courses) {
+    console.log('onDeletCourses');
+    this.coursesService.remove(element.id)
+      .subscribe({
+        next: () => {
+          this.refresh();
+          this._snackBar.open('Curso Deletado com sucesso.', 'X', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            duration: 3000,
+          })
+        }, error: () => this.openDialog('Erro ao deletar curso!')
+      });
   }
 }

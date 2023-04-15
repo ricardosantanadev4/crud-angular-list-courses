@@ -10,7 +10,8 @@
     <div class="column-flex" class="mat-elevation-z8">
       <app-courses-list *ngIf="courses$ | async as courses; else elseBlock" [coursesList]="courses"
         (addEventCoursesList)="onAddCourses()" 
-        (EditEventCoursesList)="onEditCourses($event)">
+        (EditEventCoursesList)="onEditCourses($event)"
+        (DeletEventCourseList)="onDeletCourses($event)">
       </app-courses-list>
       
       <ng-template #elseBlock>

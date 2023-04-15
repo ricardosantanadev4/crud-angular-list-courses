@@ -21,9 +21,6 @@ export class CoursesFormComponent {
     category: [''],
   });
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-
   // para criar o formulario de cadastro e necessario ter as classes FormBuilder e FormGroup. com isso e necessario importar o modulo ReactiveFormsModule
   // a classe FormBuilder vai ser usada para auxiliar na criacao de um FormGroup
   constructor(private formBuilder: NonNullableFormBuilder, private courseService: CourseServiceService
@@ -69,8 +66,8 @@ export class CoursesFormComponent {
   onSnackBar(message: string) {
     this._snackBar.open(message, '', {
       duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
     });
   }
 }

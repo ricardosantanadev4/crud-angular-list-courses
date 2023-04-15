@@ -47,4 +47,9 @@ export class CourseServiceService {
     // `${this.API}/${id}` concatena a url da API com o id
     return this.httpClient.get<Courses>(`${this.API}/${id}`);
   }
+
+  remove(id: string) {
+    // como vai ser retornado pela API um objeto do tipo void o observable não é tipado
+    return this.httpClient.delete(`${this.API}/${id}`);
+  }
 }

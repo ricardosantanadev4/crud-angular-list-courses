@@ -10,6 +10,7 @@ export class CoursesListComponent {
   @Input() coursesList: Courses[] = [];
   @Output() addEventCoursesList = new EventEmitter(false);
   @Output() EditEventCoursesList = new EventEmitter(false);
+  @Output() DeletEventCourseList = new EventEmitter(false);
   // readonly indica que esse vai ser o objeto final, e garante que ele não permite que ele seja
   readonly displayedColumns = ['name', 'category', 'actions'];
 
@@ -23,5 +24,10 @@ export class CoursesListComponent {
   onEditCoursesList(element: Courses) {
     console.log('onEditCoursesList');
     this.EditEventCoursesList.emit(element);
+  }
+
+  onDeleteCourseList(element: Courses) {
+    console.log('onDeleteCourseList');
+    this.DeletEventCourseList.emit(element);
   }
 }
