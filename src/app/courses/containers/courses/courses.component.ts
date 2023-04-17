@@ -3,7 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
-import { ErrorDialogComponent } from 'src/app/shared/componets/error-dialog/error-dialog.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { Courses } from '../../model/courses';
 import { CourseServiceService } from '../../service/course.service';
 
@@ -33,6 +34,7 @@ export class CoursesComponent {
     );
   }
 
+
   openDialog(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg
@@ -52,16 +54,28 @@ export class CoursesComponent {
 
   onDeletCourses(element: Courses) {
     console.log('onDeletCourses');
-    this.coursesService.remove(element.id)
-      .subscribe({
-        next: () => {
-          this.refresh();
-          this._snackBar.open('Curso Deletado com sucesso.', 'X', {
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            duration: 3000,
-          })
-        }, error: () => this.openDialog('Erro ao deletar curso!')
-      });
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Tem certeza que deseja remover esse curso?',
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (result: boolean) => {
+        console.log('The dialog was closed');
+        console.log(result);
+        if (result) {
+          this.coursesService.remove(element.id)
+            .subscribe({
+              next: () => {
+                this.refresh();
+                this._snackBar.open('Curso Deletado com sucesso.', 'X', {
+                  horizontalPosition: 'right',
+                  verticalPosition: 'top',
+                  duration: 3000,
+                })
+              }, error: () => this.openDialog('Erro ao deletar curso!')
+            });
+        }
+      }
+    });
   }
 }

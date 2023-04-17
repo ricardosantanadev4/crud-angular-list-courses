@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ErrorDialogComponent } from './componets/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { CategoryPipe } from './pipes/category.pipe';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -10,7 +11,8 @@ import { CategoryPipe } from './pipes/category.pipe';
   // declaracao de components
   declarations: [
     ErrorDialogComponent,
-    CategoryPipe
+    CategoryPipe,
+    ConfirmationDialogComponent,
   ],
   // importacao de modulos
   imports: [
@@ -20,7 +22,8 @@ import { CategoryPipe } from './pipes/category.pipe';
   // exportacao de components
   exports: [
     ErrorDialogComponent,
-    CategoryPipe
+    CategoryPipe,
+    ConfirmationDialogComponent
   ]
 
 })
