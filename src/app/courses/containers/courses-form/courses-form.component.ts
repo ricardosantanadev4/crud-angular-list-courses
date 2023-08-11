@@ -1,9 +1,10 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Courses } from '../../model/courses';
+import { Course } from '../../model/course';
+import { Lesson } from '../../model/lesson';
 import { CourseServiceService } from '../../service/course.service';
 
 @Component({
@@ -12,13 +13,16 @@ import { CourseServiceService } from '../../service/course.service';
   styleUrls: ['./courses-form.component.scss']
 })
 export class CoursesFormComponent {
-  // um grupo de campos de um formulario e chamado de FormGroup
-  coursesForm = this.formBuilder.group({
-    // campos do formulario
-    id: [''],
-    name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-    category: ['', [Validators.required]],
-  });
+
+  // // um grupo de campos de um formulario e chamado de FormGroup
+  // coursesForm = this.formBuilder.group({
+  //   // campos do formulario
+  //   id: [''],
+  //   name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+  //   category: ['', [Validators.required]],
+  // });
+
+  coursesForm!: FormGroup;
 
   // para criar o formulario de cadastro e necessario ter as classes FormBuilder e FormGroup. com isso e necessario importar o modulo ReactiveFormsModule
   // a classe FormBuilder vai ser usada para auxiliar na criacao de um FormGroup
@@ -31,20 +35,54 @@ export class CoursesFormComponent {
     //   category: [''l]
     // });
 
-    const course: Courses = this.route.snapshot.data['course'];
-    console.log(course);
-    // seta o que foi retornado no resolver
-    this.coursesForm.setValue({
-      id: course.id,
-      name: course.name,
-      category: course.category,
-    })
+    const course: Course = this.route.snapshot.data['course'];
+    // console.log(course.lessons);
+
+    // // seta o que foi retornado no resolver
+    // this.coursesForm.setValue({
+    //   id: course.id,
+    //   name: course.name,
+    //   category: course.category,
+    // })
     // console.coursesForm(this.form.value)
+
+    //  aqui e feito a declaracao e inializacao do formulario ao mesmo tempo
+    this.coursesForm = this.formBuilder.group({
+      id: [course.id],
+      name: [course.name, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      category: [course.category, [Validators.required]],
+      lessons: this.formBuilder.array(this.retrieveLesson(course))
+    });
+
+    // mostra o valores e os controles
+    console.log(this.coursesForm);
+
+    // mostra somente os valores
+    // console.log(this.coursesForm.value);
+  }
+
+  private retrieveLesson(course: Course) {
+    const lessons = [];
+    if (course?.lessons) {
+      course.lessons.forEach(l => lessons.push(this.createLesson(l)));
+    } else {
+      lessons.push(this.createLesson());
+      console.log('else');
+    }
+    return lessons;
+  }
+
+  private createLesson(lesson: Lesson = { id: '', name: '', youtubeURL: '' }) {
+    return this.formBuilder.group({
+      id: [lesson.id],
+      name: [lesson.name],
+      youtubeURL: [lesson.youtubeURL],
+    })
   }
 
   onSubmit() {
-    if(this.coursesForm.invalid){
-      return ;
+    if (this.coursesForm.invalid) {
+      return;
     }
     // console.log(this.coursesForm.value);
     // necessario se increver no observable para funcionar usando o subscribe()

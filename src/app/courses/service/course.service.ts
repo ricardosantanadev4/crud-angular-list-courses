@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Courses } from '../model/courses';
+import { Course } from '../model/course';
 import { HttpClient } from '@angular/common/http';
 import { first } from 'rxjs';
 
@@ -17,7 +17,7 @@ export class CourseServiceService {
 
 
   list() {
-    return this.httpClient.get<Courses[]>(this.API).pipe(
+    return this.httpClient.get<Course[]>(this.API).pipe(
       // first() se increve no observable e quando vem a primeira resposta se desinscreve do observable
       first(),
       // delay(5000),
@@ -25,7 +25,7 @@ export class CourseServiceService {
     );
   }
 
-  save(record: Partial<Courses>) {
+  save(record: Partial<Course>) {
     console.log(record);
     if (record.id) {
       console.log('update');
@@ -35,17 +35,17 @@ export class CourseServiceService {
     return this.create(record);
   }
 
-  private create(record: Partial<Courses>) {
-    return this.httpClient.post<Courses>(this.API, record);
+  private create(record: Partial<Course>) {
+    return this.httpClient.post<Course>(this.API, record);
   }
 
-  private update(record: Partial<Courses>) {
-    return this.httpClient.put<Courses>(`${this.API}/${record.id}`, record);
+  private update(record: Partial<Course>) {
+    return this.httpClient.put<Course>(`${this.API}/${record.id}`, record);
   }
 
   loadById(id: string) {
     // `${this.API}/${id}` concatena a url da API com o id
-    return this.httpClient.get<Courses>(`${this.API}/${id}`);
+    return this.httpClient.get<Course>(`${this.API}/${id}`);
   }
 
   remove(id: string) {
