@@ -38,13 +38,13 @@ export class CoursesFormComponent {
     const course: Course = this.route.snapshot.data['course'];
     // console.log(course.lessons);
 
-    // // seta o que foi retornado no resolver
+    // seta o que foi retornado no resolver
     // this.coursesForm.setValue({
     //   id: course.id,
     //   name: course.name,
     //   category: course.category,
     // })
-    // console.coursesForm(this.form.value)
+    // console.log(this.coursesForm.value);
 
     //  aqui e feito a declaracao e inializacao do formulario ao mesmo tempo
     this.coursesForm = this.formBuilder.group({
