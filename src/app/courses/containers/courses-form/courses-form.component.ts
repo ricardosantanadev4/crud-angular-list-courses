@@ -14,7 +14,10 @@ import { CourseServiceService } from '../../service/course.service';
 })
 export class CoursesFormComponent {
 
-  // // um grupo de campos de um formulario e chamado de FormGroup
+  // um grupo de campos de um formulario e chamado de FormGroup
+  // esse procedimento foi feito em aulas anteriores para tipar os campos do formulario como o 
+  // FormArray no angular poder ser um grupo de FormControls o angular nao trabalha com formularios 
+  // tipados em FormArrays
   // coursesForm = this.formBuilder.group({
   //   // campos do formulario
   //   id: [''],
@@ -22,15 +25,18 @@ export class CoursesFormComponent {
   //   category: ['', [Validators.required]],
   // });
 
+  // ! permite declarar a variavel sem precisar inicializar
   coursesForm!: FormGroup;
 
-  // para criar o formulario de cadastro e necessario ter as classes FormBuilder e FormGroup. com isso e necessario importar o modulo ReactiveFormsModule
+  // para criar o formulario de cadastro e necessario ter as classes FormBuilder e FormGroup. 
+  // com isso e necessario importar o modulo ReactiveFormsModule
   // a classe FormBuilder vai ser usada para auxiliar na criacao de um FormGroup
+  // NonNullableFormBuilder siguinifica que os campos dormulario nao podem ser nulos
   constructor(private formBuilder: NonNullableFormBuilder, private courseService: CourseServiceService
     , private _snackBar: MatSnackBar, private location: Location, private route: ActivatedRoute) {
 
     // this.coursesForm = this.formBuilder.group({
-    //   // campos do formulario
+    //   campos do formulario
     //   name: [''],
     //   category: [''l]
     // });
@@ -46,11 +52,14 @@ export class CoursesFormComponent {
     // })
     // console.log(this.coursesForm.value);
 
-    //  aqui e feito a declaracao e inializacao do formulario ao mesmo tempo
+    //  aqui e feito a declaracao e inializacao do formulario ao mesmo tempo poder utilizar o FormArray
     this.coursesForm = this.formBuilder.group({
+      // id: new FormControl([course.id]) e a mesma coisa que id: [course.id] 
+      // por isso os campos sao declarados da forma mais simples id: [course.id]
       id: [course.id],
       name: [course.name, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       category: [course.category, [Validators.required]],
+      // transforma o array de FormGroup em um controle do Angular
       lessons: this.formBuilder.array(this.retrieveLesson(course))
     });
 
@@ -61,13 +70,20 @@ export class CoursesFormComponent {
     // console.log(this.coursesForm.value);
   }
 
+  // esse metodo retorna um array de FormGroup, porem o Array de FormGroup e apenas uma lista nao e um
+  // controle do Angular para tornalo um controle vai ser necessario usar um FormArray
   private retrieveLesson(course: Course) {
     const lessons = [];
+    // a variavel course pode ser nula e  quando tentar acessar lessons vai dar erro ex: null.lessons 
+    // por isso ? o uso do operador Elves
+    // se o array tiver aulas executa o if, e se estiver vasio executa o else
     if (course?.lessons) {
+      console.log('if');
+      console.log(course);
       course.lessons.forEach(l => lessons.push(this.createLesson(l)));
     } else {
-      lessons.push(this.createLesson());
       console.log('else');
+      lessons.push(this.createLesson());
     }
     return lessons;
   }
