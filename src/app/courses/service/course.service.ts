@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Course } from '../model/course';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { first } from 'rxjs';
+import { Course } from '../model/course';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +9,12 @@ import { first } from 'rxjs';
 export class CourseServiceService {
   //  courses: Courses[] = [{ _id: '1', name: 'Angular', category: 'front-end' }];
   // private readonly API = 'http://localhost:3000/value';
+
   private readonly API = '/api/courses';
 
   constructor(private httpClient: HttpClient) {
 
   }
-
 
   list() {
     return this.httpClient.get<Course[]>(this.API).pipe(

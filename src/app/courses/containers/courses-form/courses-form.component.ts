@@ -19,7 +19,7 @@ export class CoursesFormComponent {
   // FormArray no angular poder ser um grupo de FormControls o angular nao trabalha com formularios 
   // tipados em FormArrays
   // coursesForm = this.formBuilder.group({
-  //   // campos do formulario
+  //   // inicializando os campos do formulario com vasio e tipando os campos
   //   id: [''],
   //   name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
   //   category: ['', [Validators.required]],
@@ -53,6 +53,7 @@ export class CoursesFormComponent {
     // console.log(this.coursesForm.value);
 
     //  aqui e feito a declaracao e inializacao do formulario ao mesmo tempo poder utilizar o FormArray
+    //  dessa forma o formular vai continuar sendo um formulario tipado
     this.coursesForm = this.formBuilder.group({
       // id: new FormControl([course.id]) e a mesma coisa que id: [course.id] 
       // por isso os campos sao declarados da forma mais simples id: [course.id]
@@ -74,15 +75,14 @@ export class CoursesFormComponent {
   // controle do Angular para tornalo um controle vai ser necessario usar um FormArray
   private retrieveLesson(course: Course) {
     const lessons = [];
+
     // a variavel course pode ser nula e  quando tentar acessar lessons vai dar erro ex: null.lessons 
     // por isso ? o uso do operador Elves
     // se o array tiver aulas executa o if, e se estiver vasio executa o else
     if (course?.lessons) {
-      console.log('if');
-      console.log(course);
       course.lessons.forEach(l => lessons.push(this.createLesson(l)));
-    } else {
-      console.log('else');
+    }
+    else {
       lessons.push(this.createLesson());
     }
     return lessons;
