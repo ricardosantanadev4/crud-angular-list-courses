@@ -52,8 +52,8 @@ export class CoursesFormComponent {
     // })
     // console.log(this.coursesForm.value);
 
-    //  aqui e feito a declaracao e inializacao do formulario ao mesmo tempo poder utilizar o FormArray
-    //  dessa forma o formular vai continuar sendo um formulario tipado
+    //  aqui e feito a declaracao e inializacao e tipagem do formulario ao mesmo tempo 
+    //  para poder utilizar o FormArray
     this.coursesForm = this.formBuilder.group({
       // id: new FormControl([course.id]) e a mesma coisa que id: [course.id] 
       // por isso os campos sao declarados da forma mais simples id: [course.id]
