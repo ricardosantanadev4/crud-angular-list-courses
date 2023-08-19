@@ -1,9 +1,10 @@
 {
-    "value": [
+    "courses": [
         {
-            "_id": "1",
+            "id": "1",
             "name": "Angular",
-            "category": "front-end"
+            "category": "front-end",
+            "lesson": []
         }
     ]
 }
