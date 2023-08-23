@@ -13,7 +13,7 @@ export class CourseServiceService {
   // usado no inicio do progeto para testar table usando o HttpClient sem precisar de conectar ao back-end
   // private readonly API = 'http://localhost:3000/courses';
 
-  // private readonly API = '/api/courses';
+  private readonly API = '/api/courses';
 
   constructor(private httpClient: HttpClient) {
 
