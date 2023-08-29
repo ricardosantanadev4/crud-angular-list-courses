@@ -17,11 +17,21 @@
 
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
+        <!-- sempre que for algo mais costumizavel, para ter mais controle sobre o conteudo que vai ser renderizado  
+        agente utiliza <mat-header-cell *matHeaderCellDef></mat-header-cell no lugar do <th> e no lugar do <td> 
+            agente utliziza <mat-cell *matCellDef="let element"> </mat-cell> -->
+        <!-- como vai ser adicionado um botao no lugar de um texto devemos retirar o <th> dessa coluna, 
+            e adicionar o component <mat-header-cell></mat-header-cell> e colocar o botao dentro dele -->
+        <!-- como o botao de adicionar nao vai se repetir devemos adicionar o *matHeaderCellDef 
+            indicado que o que esta dentro do <mat-header-cell *matHeaderCellDef></mat-header-cell> 
+            e o cabecalho da coluna e nao vai se repetir -->
         <mat-header-cell *matHeaderCellDef class="action-column-header">
             <button mat-mini-fab color="primary" aria-label="Adicionar um curso" (click)="onAddCoursesList()">
                 <mat-icon>add</mat-icon>
             </button>
         </mat-header-cell>
+        <!-- no lugar do <td> agente utliziza <mat-cell *matCellDef="let element"> </mat-cell> e adiciona os botoes 
+            dentro -->
         <mat-cell *matCellDef="let element" class="action-column">
             <button mat-icon-button color="primary" aria-label="Editar um curso" (click)="onEditCoursesList(element)">
                 <mat-icon>edit</mat-icon>

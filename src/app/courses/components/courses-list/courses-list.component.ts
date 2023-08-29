@@ -11,7 +11,11 @@ export class CoursesListComponent {
   @Output() addEventCoursesList = new EventEmitter(false);
   @Output() EditEventCoursesList = new EventEmitter(false);
   @Output() DeletEventCourseList = new EventEmitter(false);
-  // readonly indica que esse vai ser o objeto final, e garante que ele não permite que ele seja
+
+  /* o ng-container da tabela faz apenas a declaracao da coluna, para pode exibir essa coluna na tabela e necessario 
+  adicionar o nome dessa coluna na displayedColumns */
+  /* readonly uma vez atribuindo um valor a essa variavel os dados dessa variavel nao podem ser alterados 
+  em outro local sempre vai ser esses mesmos tanto a referencia quanto o referente e imutavel */
   readonly displayedColumns = ['name', 'category', 'actions'];
 
   constructor() { }
