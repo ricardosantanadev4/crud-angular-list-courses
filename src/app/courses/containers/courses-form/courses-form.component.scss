@@ -1,29 +1,37 @@
-// tamanho do card
+// estilizacao do card
 mat-card {
+    // define a lagura do card
     max-width: 80%;
-    //  as sigla em e a margem padrao aplicacao. 2m indica pro css que vai ser aplicada 2 vezes a margem padrao
+    /*  a sigla em e a margem padrao aplicacao. 2m indica pro css que vai ser aplicada 2 vezes a 
+    margem padrao */
     margin: 2em auto;
+    // colocado por precaucao, mais nao sutiu efeito visual no card
     text-align: center;
 }
 
-// posicao dos botoes
+// usado na tag <form> do formulario
+.min-width {
+    // foi colocado na tag <form> por precaucao mais nao sutiu efeito no tamanho do formulario
+    width: 100%;
+    // define o tamanho minimo do fomulario se testar no modo responsivo ele vai ser reduzido
+    // somente ate o tamanho minimo definido
+    min-width: 150px;
+}
+
+// usado no mat-form-field local onde ficam os inputs do formulario
+.full-width {
+    // surtiu efeito no tamanho do fomulario quando foi difinido no Fmat-form-field do formulario
+    width: 100%;
+}
+
+// posicao dos botoes de acoes
 mat-card-actions {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-// tamanho dos inputs no formulario
-.full-width {
-    width: 100%;
-}
-
-// tamanho do formulario
-.min-width {
-    width: 100%;
-    min-width: 150px;
-}
-
+// da uma margem entre os botoes mantendo eles centralizados
 button {
     margin: 2em;
 }

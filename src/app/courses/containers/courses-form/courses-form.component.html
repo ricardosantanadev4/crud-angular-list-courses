@@ -1,16 +1,18 @@
-<!-- form tag hml para representar um formlario -->
 <mat-card>
     <mat-card-content>
         <mat-toolbar color="primary">
             Detalhes do curso
         </mat-toolbar>
+
+        <!-- form tag hml utlizada para representar o formlario -->
         <form [formGroup]="coursesForm" class="min-width">
             <mat-form-field class="full-width">
                 <mat-label> Nome </mat-label>
-                <!-- #name e uma variavel pode ser acessada exemplo pelo mat-hint -->
+                <!-- #name e uma variavel que pode ser acessada ex: pelo mat-hint -->
                 <input matInput formControlName="name" #name>
                 <mat-hint align="end">{{name.value.length}}/100</mat-hint>
-                <!-- se o campo nao atender as validacoes colocadas no capo do formulario ele chama o getErrorMessage passando o valor do campo -->
+                <!-- se o campo nao atender as validacoes colocadas no capo do formulario ele chama 
+                    o getErrorMessage passando o valor do campo -->
                 <mat-error *ngIf="coursesForm.get('name')?.invalid">{{getErrorMessage('name')}}</mat-error>
             </mat-form-field>
 
