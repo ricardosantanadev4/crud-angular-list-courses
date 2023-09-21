@@ -4,8 +4,9 @@
             Detalhes do curso
         </mat-toolbar>
 
-        <!-- form tag hml utlizada para representar o formlario -->
+        <!-- formulario -->
         <form [formGroup]="coursesForm" class="min-width">
+            <!-- Form field do angular material -->
             <mat-form-field class="full-width">
                 <mat-label> Nome </mat-label>
                 <!-- #name e uma variavel local que esta fazendo referencia ao campo de input -->
@@ -20,6 +21,7 @@
                 <mat-error *ngIf="coursesForm.get('name')?.invalid">{{getErrorMessage('name')}}</mat-error>
             </mat-form-field>
 
+            <!-- Select do angular material -->
             <mat-form-field class="full-width">
                 <mat-label> Categoria </mat-label>
                 <mat-select formControlName="category">
