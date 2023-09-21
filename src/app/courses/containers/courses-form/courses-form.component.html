@@ -5,11 +5,15 @@
         </mat-toolbar>
 
         <!-- formulario -->
+        <!-- []="" vincula a propridade do elemento com propriedade do template, ou seja retorna o valor do 
+            component para o template -->
         <form [formGroup]="coursesForm" class="min-width">
             <!-- Form field do angular material -->
             <mat-form-field class="full-width">
                 <mat-label> Nome </mat-label>
-                <!-- #name e uma variavel local que esta fazendo referencia ao campo de input -->
+                <!--  formControlName vincula o input ao controle do formulario -->
+                <!-- #name e uma variavel de referencia do template que esta fazendo referencia ao campo de 
+                    input -->
                 <input matInput formControlName="name" #name>
                 <!-- com isso e possivel interpolar a quantidade de caracters digitada no input utilizando a 
                     varivel de referencia #name -->
@@ -25,6 +29,7 @@
             <mat-form-field class="full-width">
                 <mat-label> Categoria </mat-label>
                 <mat-select formControlName="category">
+                    <!-- value="null" atribuiu um valor estatico um string a propriedade value -->
                     <mat-option value="null"></mat-option>
                     <mat-option value="Front-end"> Front-end </mat-option>
                     <mat-option value="Back-end"> Back-end </mat-option>
