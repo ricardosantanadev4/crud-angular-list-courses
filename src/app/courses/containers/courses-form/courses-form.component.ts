@@ -4,8 +4,10 @@ import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '../../model/course';
+import { Food } from '../../model/food';
 import { Lesson } from '../../model/lesson';
 import { CourseServiceService } from '../../service/course.service';
+
 
 @Component({
   selector: 'app-courses-form',
@@ -70,6 +72,14 @@ export class CoursesFormComponent {
     // mostra somente os valores
     // console.log(this.coursesForm.value);
   }
+  // criado apenas para estudo do Basic select with initial value and no form
+  foods: Food[] = [
+    { valueFood: 'steak-0', viewValueFood: 'Steak' },
+    { valueFood: 'pizza-1', viewValueFood: 'Pizza' },
+    { valueFood: 'tacos-2', viewValueFood: 'Tacos' },
+  ];
+
+  selectedFood = this.foods[0].valueFood;
 
   /* esse metodo retorna um array de FormGroup, porem o Array de FormGroup e apenas uma lista nao e um
      controle do Angular para tornalo um controle vai ser necessario usar um FormArray */
