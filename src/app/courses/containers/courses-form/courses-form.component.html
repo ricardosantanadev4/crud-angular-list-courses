@@ -6,7 +6,7 @@
 
         <!-- formulario -->
         <!-- []="" atribui um valor a propriedade do elemento DOM que esta dentro dos [], nesse caso o valor
-             atribuido a direita dos [] e avaliado como um expressao dinaminca, nesse exemplo a propriedade
+             atribuido a direita dos [] e avaliado como uma expressao dinaminca, nesse exemplo a propriedade
             formGroup esta recebendo o retorno da variavel coursesForm que esta no component, Sem os 
             colchetes, Angular trata o lado direito como uma string literal e define a propriedade para 
             esse valor estático ou seja nao iria receber o retorno da variavel coursesForm e sim a string 
@@ -54,11 +54,12 @@
                  valor para a selectedFood do component -->
                 <mat-select [(value)]="selectedFood">
                     <!-- value tambem e uma propridade do mat-option -->
-                    <!-- nesse exemplo o valor recebido na value do mat-option [value]="option.valueFood", e o valor que esta sendo 
-                        interpolado no mat-option {{ option.viewValueFood }} estao vindo do array, como a value 
-                        do mat-select foi inicilizada com um valor de selectedFood quando se esse valor for 
-                        igual ao valor interado no option.value ele vai inserir no input o viewValue 
-                        respectivo, resumindo e uma forma simples de iniciar o campo com um valor ja predefinido -->
+                    <!-- nesse exemplo o valor recebido na value do mat-option [value]="option.valueFood", e
+                         o valor que esta sendo interpolado no mat-option {{ option.viewValueFood }} estao 
+                         vindo do array, como a value do mat-select foi inicilizada com um valor de 
+                         selectedFood quando esse valor for igual ao valor interado no option.value ele vai
+                         inserir no input o viewValue respectivo, resumindo e uma forma simples de iniciar o
+                         campo com um valor ja predefinido -->
                     <mat-option [value]="option.valueFood" *ngFor="let option of foods">{{ option.viewValueFood }}
                     </mat-option>
                 </mat-select>
