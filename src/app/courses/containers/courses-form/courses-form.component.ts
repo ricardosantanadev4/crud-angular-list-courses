@@ -1,10 +1,9 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, UntypedFormArray, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '../../model/course';
-import { Food } from '../../model/food';
 import { Lesson } from '../../model/lesson';
 import { CourseServiceService } from '../../service/course.service';
 
@@ -21,7 +20,7 @@ export class CoursesFormComponent {
      FormArray no angular poder ser um grupo de FormControls o angular nao trabalha com formularios 
      tipados em FormArrays */
   /* coursesForm = this.formBuilder.group({
-     // inicializando os campos do formulario com vasio e tipando os campos
+     // inicializando os campos do formulario com vazio e tipando os campos
      id: [''],
      name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
      category: ['', [Validators.required]],
@@ -43,6 +42,7 @@ export class CoursesFormComponent {
        category: [''l]
      }); */
 
+    //  esta recebento o return do resolver
     const course: Course = this.route.snapshot.data['course'];
     // console.log(course.lessons);
 
@@ -63,7 +63,7 @@ export class CoursesFormComponent {
       name: [course.name, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       category: [course.category, [Validators.required]],
       // transforma o array de FormGroup em um controle do Angular
-      lessons: this.formBuilder.array(this.retrieveLesson(course))
+      lessons: this.formBuilder.array(this.retrieveLesson(course), Validators.required)
     });
 
     // mostra o valores e os controles
@@ -72,14 +72,6 @@ export class CoursesFormComponent {
     // mostra somente os valores
     // console.log(this.coursesForm.value);
   }
-  // criado apenas para estudo do Basic select with initial value and no form
-  foods: Food[] = [
-    { valueFood: 'steak-0', viewValueFood: 'Steak' },
-    { valueFood: 'pizza-1', viewValueFood: 'Pizza' },
-    { valueFood: 'tacos-2', viewValueFood: 'Tacos' },
-  ];
-
-  selectedFood = this.foods[0].valueFood;
 
   /* esse metodo retorna um array de FormGroup, porem o Array de FormGroup e apenas uma lista nao e um
      controle do Angular para tornalo um controle vai ser necessario usar um FormArray */
@@ -98,24 +90,44 @@ export class CoursesFormComponent {
     return lessons;
   }
 
+  /* se nao for passado nenhum parametro quando chamar o metodo createLesson(), por padrao o parametro lesson do 
+     metodo  vai ser inicializado com um objeto vazio */
   private createLesson(lesson: Lesson = { id: '', name: '', youtubeURL: '' }) {
     return this.formBuilder.group({
       id: [lesson.id],
-      name: [lesson.name],
-      youtubeURL: [lesson.youtubeURL],
+      name: [lesson.name, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      youtubeURL: [lesson.youtubeURL, [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
     })
   }
 
+  getLessonsFormArray() {
+    return (<UntypedFormArray>this.coursesForm.get('lessons')).controls
+  }
+
+  addNewLesson() {
+    // necessario tipar o formulario como UntypedFormArray para o .push() poder funcionar
+    const lessons = this.coursesForm.get('lessons') as UntypedFormArray;
+    lessons.push(this.createLesson());
+  }
+
+  deleteLesson(index: number) {
+    // necessario tipar o formulario como UntypedFormArray para o .removeAt() poder funcionar
+    const lessons = this.coursesForm.get('lessons') as UntypedFormArray;
+    lessons.removeAt(index);
+  }
+
   onSubmit() {
-    if (this.coursesForm.invalid) {
-      return;
+    if (this.coursesForm.valid) {
+      // console.log(this.coursesForm.value);
+      // necessario se increver no observable para funcionar usando o subscribe()
+      this.courseService.save(this.coursesForm.value).subscribe({
+        next: () =>
+          this.onSucess('Curso salvo com sucesso!'), error: () => this.onError('Erro ao salvar curso')
+      });
+    } else {
+      alert('coursesForm inválido!');
     }
-    // console.log(this.coursesForm.value);
-    // necessario se increver no observable para funcionar usando o subscribe()
-    this.courseService.save(this.coursesForm.value).subscribe({
-      next: () =>
-        this.onSucess('Curso salvo com sucesso!'), error: () => this.onError('Erro ao salvar curso')
-    });
+
   }
 
   /* no lugar de usar router.navigate para voltar a tela inicial poder ser usado o location: Location
@@ -174,5 +186,15 @@ export class CoursesFormComponent {
 
     return 'erro';
 
+  }
+
+  idFormArrayRequered() {
+    const lenssons = this.coursesForm.get('lessons') as UntypedFormArray;
+    /* !lenssons.valid so vai retornar se o campo nao for valido
+    /* lenssons.hasError('required') so retorna se o campo tiver erro 'required' 
+       ou se ja se campo nao estiver preenchido */
+    /* .touched utilizado para exibir uma mensagem somente quando campo e tocado, 
+       se ele nao for utilizado a mensagem vai aparecer constantemente no compo */
+    return !lenssons.valid && lenssons.hasError('required') && lenssons.touched;
   }
 }

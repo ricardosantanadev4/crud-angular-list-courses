@@ -42,30 +42,45 @@
                 </mat-error>
             </mat-form-field>
 
-            <!-- criado apenas para estudo do Basic select with initial value and no form  -->
-            <h4>Basic mat-select with initial value</h4>
-            <mat-form-field appearance="fill">
-                <mat-label>Favorite Food</mat-label>
-                <!-- mat-select é um controle de formulário para selecionar um valor de um conjunto de opcoes -->
-                <!-- value e uma propriedade do mat-select -->
-                <!-- [(value)]="selectedFood" esta fazendo uma vinculacao bidirecional a propriedade value
-                     do mat-select, nesse caso a value recebe o valor retornado da variavel selectedFood do 
-                     component, e fica escutando o evento no campo do mat-select para enviar esse
-                 valor para a selectedFood do component -->
-                <mat-select [(value)]="selectedFood">
-                    <!-- value tambem e uma propridade do mat-option -->
-                    <!-- nesse exemplo o valor recebido na value do mat-option [value]="option.valueFood", e
-                         o valor que esta sendo interpolado no mat-option {{ option.viewValueFood }} estao 
-                         vindo do array, como a value do mat-select foi inicilizada com um valor de 
-                         selectedFood quando esse valor for igual ao valor interado no option.value ele vai
-                         inserir no input o viewValue respectivo, resumindo e uma forma simples de iniciar o
-                         campo com um valor ja predefinido -->
-                    <mat-option [value]="option.valueFood" *ngFor="let option of foods">{{ option.viewValueFood }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <!-- esta interpolando o valor da variavel selectedFood do component -->
-            <p>You selected: {{selectedFood}}</p>
+            <mat-toolbar>
+                <span>Aulas</span>
+                <button mat-icon-button color="accent" (click)="addNewLesson()">
+                    <mat-icon aria-label="Adicionar uma nova aula">add</mat-icon>
+                </button>
+            </mat-toolbar>
+
+            <!-- mensagem de validacao do compo lessons -->
+            <mat-error *ngIf="idFormArrayRequered()" class="form-array-error">Adicione pelo menos uma aula
+            </mat-error>
+
+            <!-- campo adicionar aulas -->
+            <table style="width: 100%;" formArrayName="lessons"
+                *ngFor="let lesson of getLessonsFormArray();let i = index">
+                <tr [formGroupName]="i">
+                    <td style="width: 65%;">
+                        <mat-form-field class="full-width">
+                            <mat-label> Nome da Aula </mat-label>
+                            <input matInput formControlName="name">
+                            <!-- como o campo e um array e necessario utilizar o indice para poder analizar o obseto -->
+                            <mat-error *ngIf="getLessonsFormArray()[i].get('name')?.invalid">
+                                Campo inválido.
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td style="width: 30%;">
+                        <mat-form-field class="full-width">
+                            <mat-label> URL </mat-label>
+                            <span matPrefix>https://youtu.be/</span>
+                            <input matInput formControlName="youtubeURL">
+                        </mat-form-field>
+                    </td>
+                    <td style="width: 5%;">
+                        <button mat-icon-button color="warn" (click)="deleteLesson(i)">
+                            <mat-icon aria-label="Deletar uma nova aula">delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </form>
     </mat-card-content>
 
