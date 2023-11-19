@@ -90,6 +90,7 @@ export class CoursesFormComponent {
     return lessons;
   }
 
+  // esse metodo e ultilizado para criar uma nova aula
   /* se nao for passado nenhum parametro quando chamar o metodo createLesson(), por padrao o parametro lesson do 
      metodo  vai ser inicializado com um objeto vazio */
   private createLesson(lesson: Lesson = { id: '', name: '', youtubeURL: '' }) {
@@ -100,13 +101,18 @@ export class CoursesFormComponent {
     })
   }
 
+  // esse metodo retorna os controls do formArray lessons, ou seja as aulas do formArray lessons
   getLessonsFormArray() {
+    // necesario tipar como <UntypedFormArray> para poder utilizar .controls
     return (<UntypedFormArray>this.coursesForm.get('lessons')).controls
   }
 
+
+  // esse metodo e utilizado para adicionar novas aulas ao array lessons
   addNewLesson() {
     // necessario tipar o formulario como UntypedFormArray para o .push() poder funcionar
     const lessons = this.coursesForm.get('lessons') as UntypedFormArray;
+    // aqui e acionando o metodo createLesson() que cria uma nova aula, e o lessons.push() adiciona essa nova aula no array lessons
     lessons.push(this.createLesson());
   }
 
@@ -154,6 +160,7 @@ export class CoursesFormComponent {
     });
   }
 
+  // esse metodo retorna um mesagem de erro de validaco de acordo com o erro de validacao do campo do formulario
   getErrorMessage(fieldName: string) {
     // .get() metodo usado para referenciar o campo do formulario quando o formulario e do tipo .group
     const field = this.coursesForm.get(fieldName);
@@ -188,13 +195,15 @@ export class CoursesFormComponent {
 
   }
 
-  idFormArrayRequered() {
+  // esse metodo retorna true se o campo do array for invalido e se nao for preenchido e se o capo for campo for tocado 
+  isFormArrayRequered() {
     const lenssons = this.coursesForm.get('lessons') as UntypedFormArray;
     /* !lenssons.valid so vai retornar se o campo nao for valido
     /* lenssons.hasError('required') so retorna se o campo tiver erro 'required' 
        ou se ja se campo nao estiver preenchido */
     /* .touched utilizado para exibir uma mensagem somente quando campo e tocado, 
-       se ele nao for utilizado a mensagem vai aparecer constantemente no compo */
+       se ele nao for utilizado a mensagem vai aparecer constantemente no campo */
     return !lenssons.valid && lenssons.hasError('required') && lenssons.touched;
   }
+  
 }
