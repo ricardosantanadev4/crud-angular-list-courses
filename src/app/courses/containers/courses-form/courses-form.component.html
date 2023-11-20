@@ -26,7 +26,8 @@
                     no campo name de coursesForm no component ele vai interpolar o metodo getErrorMessage 
                     passando a string 'name' como parametro, como o metodo getErrorMessage retorna uma string 
                     essa mensagem vai ser exibida no template, nesse caso em baixo do input -->
-                <mat-error *ngIf="coursesForm.get('name')?.invalid">{{getErrorMessage('name')}}</mat-error>
+                <mat-error *ngIf="coursesForm.get('name')?.invalid">{{formUtils.getErrorMessage(coursesForm,
+                    'name')}}</mat-error>
             </mat-form-field>
 
             <!-- Select do angular material -->
@@ -38,7 +39,8 @@
                     <mat-option value="Front-end"> Front-end </mat-option>
                     <mat-option value="Back-end"> Back-end </mat-option>
                 </mat-select>
-                <mat-error *ngIf="coursesForm.get('category')?.invalid">{{getErrorMessage('category')}}
+                <mat-error *ngIf="coursesForm.get('category')?.invalid">{{formUtils.getErrorMessage(coursesForm,
+                    'category')}}
                 </mat-error>
             </mat-form-field>
 
@@ -51,7 +53,8 @@
             </mat-toolbar>
 
             <!-- mensagem de validacao do campo lessons -->
-            <mat-error *ngIf="isFormArrayRequered()" class="form-array-error">Adicione pelo menos uma aula
+            <mat-error *ngIf="formUtils.isFormArrayRequered(coursesForm,'lessons')" class="form-array-error">Adicione
+                pelo menos uma aula
             </mat-error>
 
             <!-- campo da aula  -->
@@ -64,7 +67,7 @@
                             <input matInput formControlName="name">
                             <!-- como o campo e um array, e necessario utilizar o indice para poder analizar o objeto que esta passando no array -->
                             <mat-error *ngIf="getLessonsFormArray()[i].get('name')?.invalid">
-                                Campo inválido.
+                                {{formUtils.getFormArrayFieldErrorMessage(coursesForm, 'lessons', 'name', i)}}
                             </mat-error>
                         </mat-form-field>
                     </td>
@@ -74,6 +77,9 @@
                             <!-- Inputs with prefixes and suffixes -->
                             <span matPrefix>https://youtu.be/</span>
                             <input matInput formControlName="youtubeURL">
+                            <mat-error *ngIf="getLessonsFormArray()[i].get('youtubeURL')?.invalid">
+                                {{formUtils.getFormArrayFieldErrorMessage(coursesForm, 'lessons', 'youtubeURL', i)}}
+                            </mat-error>
                         </mat-form-field>
                     </td>
                     <td style="width: 5%;">

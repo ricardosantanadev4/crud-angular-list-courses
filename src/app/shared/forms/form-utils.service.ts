@@ -8,11 +8,11 @@ export class FormUtilsService {
 
   constructor() { }
 
-  /* metodo criado para poder validar e marcar todos os campos do formulario quando e clicado no botao submit, 
-  para deixar a mensagem de erro em baixo */
+  // esse metodo mostra para o usuario as mensagens de validacoes ao mesmo tempo em todos o campos invalidos
   validateAllFormFields(formGroup: UntypedFormGroup | UntypedFormArray) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
+      // if (control instanceof UntypedFormControl) verifica se a instancia e um FormControl
       if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
       } else if (control instanceof UntypedFormGroup || control instanceof UntypedFormArray) {
@@ -22,7 +22,7 @@ export class FormUtilsService {
     });
   }
 
-  // esse metodo retorna um mesagem de erro de validaco de acordo com o erro de validacao do campo do formulario
+  // esse metodo retorna um mesagem de erro de validaco de acordo com o erro de validacao nos FormControls do fomulario
   /* foi dado o nome formGroup ao parametro do formulario no metodo, porque pode ser recebido um grupo de formulario, 
      pode ser um array de formulario, pode ser um controle de formulario, por isso o nome generico */
   /* como a gora esta sendo recebido algo abstrato agente nao sabe qual vai ser o tipo do formulario, o parametro 
@@ -65,7 +65,7 @@ export class FormUtilsService {
 
   }
 
-  // metodo criado para o bter a mensagem de erro de um formArray, ex: o campo lessons
+  // metodo criado para obter a mensagem de erro de um formArray, ex: o campo lessons
   getFormArrayFieldErrorMessage(formGroup: UntypedFormGroup, formArrayName: string, fieldName: string, index: number) {
     const formArray = formGroup.get(formArrayName) as UntypedFormArray;
     const field = formArray.controls[index].get(fieldName) as UntypedFormControl;
