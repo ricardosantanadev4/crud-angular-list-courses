@@ -34,10 +34,9 @@
             <mat-form-field class="full-width">
                 <mat-label> Categoria </mat-label>
                 <mat-select formControlName="category">
-                    <!-- value="null" atribuiu um valor estatico um string a propriedade value -->
-                    <mat-option value="null"></mat-option>
-                    <mat-option value="Front-end"> Front-end </mat-option>
-                    <mat-option value="Back-end"> Back-end </mat-option>
+                    <!-- value="Front-end" atribuiu um valor estatico como string a propriedade value -->
+                    <mat-option value="Front-end"> Front-End </mat-option>
+                    <mat-option value="Back-end"> Back-End </mat-option>
                 </mat-select>
                 <mat-error *ngIf="coursesForm.get('category')?.invalid">{{formUtils.getErrorMessage(coursesForm,
                     'category')}}
