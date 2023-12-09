@@ -18,7 +18,8 @@ export class CoursesListComponent {
   em outro local sempre vai ser esses mesmos tanto a referencia quanto o referente e imutavel */
   readonly displayedColumns = ['name', 'category', 'actions'];
 
-  constructor() { }
+  constructor() {
+  }
 
   onAddCoursesList() {
     console.log('addCoursesList');
@@ -34,4 +35,5 @@ export class CoursesListComponent {
     console.log('onDeleteCourseList');
     this.DeletEventCourseList.emit(element);
   }
+
 }

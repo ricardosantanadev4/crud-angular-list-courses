@@ -4,21 +4,24 @@
       <span>Cursos disponíveis</span>
     </mat-toolbar>
 
-    <div class="column-flex" class="mat-elevation-z8">
-      
+    <div class="mat-elevation-z8" *ngIf="courses$ | async as coursePage; else elseBlock">
+
       <!-- [inputComponentFilho]="dadosDoComponentPai" component filho recebe dados do component pai @Input() no component filho -->
       <!-- (eventoDoComponentFilho)="metodoComponentPai()" componentFilho envia um evento para o componentPai @Output() no component filho -->
       <!-- $event contem o onjeto que esta sendo enviado -->
-      <app-courses-list *ngIf="courses$ | async as courses; else elseBlock" [coursesList]="courses"
-        (addEventCoursesList)="onAddCourses()" (EditEventCoursesList)="onEditCourses($event)"
-        (DeletEventCourseList)="onDeletCourses($event)">
+      <app-courses-list [coursesList]="coursePage.course" (addEventCoursesList)="onAddCourses()"
+        (EditEventCoursesList)="onEditCourses($event)" (DeletEventCourseList)="onDeletCourses($event)">
       </app-courses-list>
 
-      <ng-template #elseBlock>
-        <div class="loding-spinner">
-          <mat-spinner></mat-spinner>
-        </div>
-      </ng-template>
+      <mat-paginator #paginator class="" (page)="refresh($event)" [length]="coursePage.totalElements"
+        [pageSize]="pageSize" [disabled]="disabled" showFirstLastButtons [pageSizeOptions]="[5, 10, 15, 20]"
+        [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page of courses">
+      </mat-paginator>
     </div>
+    <ng-template #elseBlock>
+      <div class="loding-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
   </mat-card-content>
 </mat-card>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { first } from 'rxjs';
 import { Course } from '../model/course';
+import { CoursePage } from '../model/course-page';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +20,25 @@ export class CourseServiceService {
 
   }
 
-  list() {
-    return this.httpClient.get<Course[]>(this.API).pipe(
-      // first() se increve no observable e quando vem a primeira resposta se desinscreve do observable
+  // list() {
+  //   return this.httpClient.get<Course[]>(this.API).pipe(
+  //     // first() se increve no observable e quando vem a primeira resposta se desinscreve do observable
+  //     first(),
+  //     // delay(5000),
+  //     // tap(courses => console.log(courses))
+  //   );
+  // }
+
+  list(pageIndex: number, pageSize: number) {
+    // dessa forma nao precisa passar ?pageNumber= &pageSize=
+    return this.httpClient.get<CoursePage>(this.API, { params: { pageIndex, pageSize } }).pipe(
       first(),
-      // delay(5000),
-      // tap(courses => console.log(courses))
+      // map(data => data.course),
+      // tap(data => (this.cache = data.course))
     );
+
+    // dessa forma precisa passar ?pageNumber= &pageSize=
+    // return this.httpClient.get<CoursePage>(`${this.API}?pageNumber=${pageIndex}&pageSize=${pageSize}`);
   }
 
   save(record: Partial<Course>) {
